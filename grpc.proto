@@ -1,0 +1,369 @@
+syntax = "proto3";
+package tiktik.nj4x.main.grpc;
+option java_multiple_files = true;
+option java_package = "tiktik.nj4x.main.grpc";
+option java_outer_classname = "TiktikgRpc";
+option objc_class_prefix = "RTG";
+// BulkTickListener
+message Tick {
+    double 	ask =1;
+    double 	bid=2;
+    int32 flags=3;
+    double 	last=4;
+    string	symbol=5;
+    string time=6;
+    int64 volume=7;
+}
+message BulkTickListener {
+    string action = 1;
+    string updateAt = 2;
+    repeated Tick symbols = 3;
+    int32 version =4;
+    string server = 5;
+    string accountNumber = 6;
+    int64 timestamp =7;
+}
+message  AccountInfoGrpc {
+    string accountNumber =1;
+    string password = 2;
+    string server = 3;
+    int32 version = 4;
+    string id =5;
+    int32 isListenPrice =6;
+}
+
+
+message ResponseAccountAction {
+    string id = 1;
+    string status = 2;
+    string errorCode =3;
+    string errorMessage =4;
+    int64 timestamp =5;
+}
+
+
+message AccountInfoMT {
+    string balance =1;
+    string company =2;
+    string credit =3;
+    string currency = 4;
+    string equity =5;
+    string freeMargin = 6;
+    string isTradeAllowed = 7;
+    string isTradeExpert = 8;
+    string leverage =9;
+    string limitOrders = 10;
+    string login =11;
+    string margin = 12;
+    string marginLevel = 13;
+    string marginMode = 14;
+    string marginSoCall = 15;
+    string marginSoLevel = 16;
+    string name = 17;
+    string profit = 18;
+    string server = 19;
+}
+
+message SymbolInfo {
+    bool isSelected = 1;
+    bool isFloatingSpread = 2;
+    int64 sessionDeals = 3;
+    int64 sessionBuyOrders = 4;
+    int64 sessionSellOrders = 5;
+    int64 volume = 6;
+    int64 volumeHigh = 7;
+    int64 volumeLow = 8;
+    int32 digits = 9;
+    int32 spread = 10;
+    int32 stopsLevel = 11;
+    int32 freezeLevel = 12;
+    string contractPriceCalculationMode =13;
+    string tradeMode = 14;
+    string swapMode = 15;
+    string swapRollover3Days = 16;
+    string tradeExecutionMode = 17;
+    string time = 18;
+    string startTime = 19;
+    string expirationTime = 20;
+    string expirationModes = 21;
+    string fillingModes =22;
+    string orderModes = 23;
+    string baseCurrency = 24;
+    string profitCurrency = 25;
+    string marginCurrency = 26;
+    string description = 27;
+    string path = 28;
+    double bid = 29;
+    double bidHigh = 30;
+    double bidLow = 31;
+    double ask = 32;
+    double askHigh = 33;
+    double askLow = 34;
+    double last = 35;
+    double lastHigh = 36;
+    double lastLow = 37;
+    double point = 38;
+    double tradeTickValue = 39;
+    double tradeTickValueProfit = 40;
+    double tradeTickValueLoss = 41;
+    double tradeTickSize = 42;
+    double tradeContractSize = 43;
+    double minVolume = 44;
+    double maxVolume = 45;
+    double stepVolume = 46;
+    double limitVolume = 47;
+    double longSwap = 48;
+    double shortSwap = 49;
+    double initialMargin = 50;
+    double maintenanceMargin =51;
+    double longMargin =52;
+    double shortMargin = 53;
+    double limitMargin = 54;
+    double stopMargin = 55;
+    double stopLimitMargin = 56;
+    double sessionVolume = 57;
+    double sessionTurnover = 58;
+    double sessionInterest = 59;
+    double sessionBuyOrdersVolume = 60;
+    double sessionSellOrdersVolume = 61;
+    double sessionOpenPrice = 62;
+    double sessionClosePrice = 63;
+    double sessionAverageWeightedPrice = 64;
+    double sessionSettlementPrice = 65;
+    double sessionMinLimitPrice = 66;
+    double sessionMaxLimitPrice = 67;
+}
+message GetSymbols {
+    string accountNumber = 1;
+    string server = 2;
+    int32 version =3;
+    repeated string symbol = 4;
+}
+message RepGetSymbol {
+    string status =1;
+    string errorCode = 2;
+    string errorMessage = 3;
+    repeated SymbolInfo symbols = 4;
+}
+message ReqSubscribeSymbol {
+    string accountNumber = 1;
+    string server = 2;
+    int32 version = 3;
+    repeated string symbols =4;
+}
+
+
+message ReqSubscribe {
+    string status = 1;
+    string errorCode = 2;
+    string errorMessage = 3;
+    repeated string symbols = 4;
+    string id = 5;
+    string accountNumber = 6;
+    string server =7;
+    int64 timestamp =8;
+}
+
+
+
+message UpdateAccount {
+    string action = 1;
+    string id = 2;
+    string server = 3;
+    int32  version = 4;
+    string createdAt = 5;
+    string updatedAt = 7;
+    string connectedAt = 8;
+    string disconnectedAt = 9;
+    string status = 10;
+    string errorCode = 11;
+    string errorMessage = 12;
+    string requestAction = 13;
+    int64 timestamp =14;
+}
+
+// new Order
+message ReqOrder {
+    string accountNumber = 1;
+    string server = 2;
+    int32 version = 3;
+    int32 type = 4;
+    string symbol = 5;
+    double activePrice = 6;
+    double sl = 7;
+    double tp = 8;
+    double lots = 9;
+    string comment = 10;
+    double magic = 11;
+    string expiration = 12;
+    int32 arrowColor = 13;
+    int32 slippage = 14;
+}
+message ReqTicket {
+string accountNumber = 1;
+string server = 2;
+string password = 3;
+int32 version = 4;
+int64 ticket = 5;
+double activePrice = 6;
+double sl = 7;
+double tp =8;
+string expiration = 9;
+int64 arrowColor = 10;
+}
+
+message ResAccountInfo {
+    string id =1;
+    string accountNumber = 2;
+    string server = 3;
+    int32 version = 4;
+    AccountInfoMT accountInfo = 5;
+    repeated OrderInfo liveOrders = 6;
+    repeated OrderInfo historicalOrders = 7;
+    int64 timestamp =8;
+}
+
+
+message OrderInfo {
+    int64 ticket = 1;
+    map<string,int32> type = 2;
+    string openTime = 3;
+    string closeTime = 4;
+    double magic = 5;
+    string expiration = 6;
+    double lots = 7;
+    double openPrice = 8;
+    double closePrice = 9;
+    double sl = 10;
+    double tp = 11;
+    double profit = 12;
+    double commission = 13;
+    double swap = 14;
+    string symbol =15;
+    string comment =16;
+    bool profitChanged = 17;
+    bool closeTimeChanged =18;
+    bool stopLossChanged = 19;
+    bool lotsChanged = 20;
+    bool openPriceChanged = 21;
+    bool typeChanged = 22;
+    bool openTimeChanged = 23;
+    bool swapChanged = 24;
+    bool modified = 25;
+    bool commissionChanged = 26;
+    bool closePriceChanged = 27;
+    bool takeProfitChanged = 28;
+    bool expirationTimeChanged = 29;
+}
+
+message ReqGetOrder {
+    string type =1;
+    string accountNumber = 2;
+    string server = 3;
+    int32 version = 4;
+}
+
+message ResOrderInfo {
+    string status = 1;
+    string errorCode = 2;
+    string errorMessage = 3;
+    repeated OrderInfo orders = 4;
+    int64 timestamp =5;
+}
+message ReqDeleteOrder {
+    string accountNumber = 1;
+    string server = 2;
+    string password  = 3;
+    int32 version =4;
+    int64 ticket = 5;
+    bool partialClose = 6;
+    double closeLots = 7;
+}
+message InfoMachine {
+    string action = 1;
+    string ramTotal = 2;
+    string ramUsed = 3;
+    string cpu = 4;
+    string diskUsed = 5;
+    string diskTotal = 6;
+    string updatedAt = 7;
+    int64 timestamp =8;
+}
+
+message ReqHistoryPrice{
+    string id = 1;
+    string accountNumber = 2;
+    string server = 3;
+    string password = 4;
+    int32 version = 5;
+    string timeframe = 6;
+    string symbol = 7;
+    int64 max = 8;
+}
+
+message Price {
+    string symbol = 1;
+    string broker = 2;
+    double open = 3;
+    double close = 4;
+    double high = 5;
+    double low = 6;
+    string time = 7;
+    int64 volume = 8;
+    map<string,int64> timeframe = 9;
+}
+
+message ResHistoryPrice {
+    string status = 1;
+    string errorCode = 2;
+    string errorMessage = 3;
+    repeated Price history = 4;
+    int64 timestamp =5;
+}
+message PositionInfo {
+     map<int64,OrderInfo> liveOrders =1;
+     map<int64,OrderInfo> historicalOrders =2;
+     double accountBalance = 3;
+     double accountEquity = 4;
+     double accountMargin = 5;
+}
+message PositionChangeInfo {
+    repeated OrderInfo deletedOrders = 1;
+    repeated OrderInfo closedOrders = 2;
+    repeated OrderInfo newOrders = 3;
+    repeated OrderInfo modifiedOrders = 4;
+}
+message ResPosition {
+    string status = 1;
+    string errorCode = 2;
+    string errorMessage = 3;
+    string action = 4;
+    PositionInfo positionInfo = 5;
+    int64 timestamp =6;
+    PositionChangeInfo positionChangeInfo = 7;
+    string accountNumber = 8;
+    string server = 9;
+    int32 version = 10;
+}
+
+
+message Empty {
+
+}
+service NJ4XService{
+    rpc ConnectTerminal(AccountInfoGrpc) returns (ResponseAccountAction);
+    rpc DisconnectTerminal(AccountInfoGrpc) returns (ResponseAccountAction);
+    rpc RestartTerminal(AccountInfoGrpc) returns (ResponseAccountAction);
+    rpc GetAccountInfo(AccountInfoGrpc) returns (ResAccountInfo);
+    rpc GetPriceRealtime(AccountInfoGrpc) returns (stream BulkTickListener);
+    rpc SubscribeSymbols(ReqSubscribeSymbol) returns (ReqSubscribe);
+    rpc UnsubscribeSymbols(ReqSubscribeSymbol) returns (ReqSubscribe);
+    rpc GetOrder(ReqGetOrder) returns (ResOrderInfo);
+    rpc NewOrder(ReqOrder) returns (ResOrderInfo);
+    rpc ModifyOrder(ReqTicket) returns (ResOrderInfo);
+    rpc DeleteOrder(ReqDeleteOrder) returns (ResOrderInfo);
+    rpc ManageTerminal(Empty) returns (stream UpdateAccount );
+    rpc GetInfoMachine(Empty) returns (stream InfoMachine);
+    rpc Position(Empty) returns (stream ResPosition);
+    rpc GetHistoryPrice(ReqHistoryPrice) returns (ResHistoryPrice);
+}
